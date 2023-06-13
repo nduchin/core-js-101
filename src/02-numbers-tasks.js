@@ -7,7 +7,6 @@
  *                                                                                           *
  ******************************************************************************************* */
 
-
 /**
  * Returns an area of a rectangle given by width and height.
  *
@@ -20,9 +19,8 @@
  *   5, 5  => 25
  */
 function getRectangleArea(width, height) {
-  return width*height
+  return width * height;
 }
-
 
 /**
  * Returns a circumference of circle given by radius.
@@ -36,7 +34,7 @@ function getRectangleArea(width, height) {
  *   0    => 0
  */
 function getCircleCircumference(radius) {
-  return radius*2*Math.PI
+  return radius * 2 * Math.PI;
 }
 
 /**
@@ -52,7 +50,7 @@ function getCircleCircumference(radius) {
  *  -3, 3  => 0
  */
 function getAverage(value1, value2) {
-  return value1/2 + value2/2
+  return value1 / 2 + value2 / 2;
 }
 
 /**
@@ -71,7 +69,7 @@ function getAverage(value1, value2) {
  *   (-5,0) (10,-10) => 18.027756377319946
  */
 function getDistanceBetweenPoints(x1, y1, x2, y2) {
-  return Math.sqrt((x1-x2)**2+(y1-y2)**2)
+  return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
 }
 
 /**
@@ -87,9 +85,8 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
  *   5*x = 0         => 0
  */
 function getLinearEquationRoot(a, b) {
-  return -b/a
+  return -b / a;
 }
-
 
 /**
  * Returns an angle (in radians) between two vectors given by xi and yi,
@@ -110,7 +107,7 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (1,2)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-  return Math.acos((x1*x2+y1*y2)/(Math.sqrt((x1**2+y1**2)*(x2**2+y2**2))))
+  return Math.acos((x1 * x2 + y1 * y2) / (Math.sqrt((x1 ** 2 + y1 ** 2) * (x2 ** 2 + y2 ** 2))));
 }
 
 /**
@@ -126,9 +123,8 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
  *     0     => 0
  */
 function getLastDigit(value) {
-  return value%10
+  return value % 10;
 }
-
 
 /**
  * Returns a number by given string representation.
@@ -142,7 +138,7 @@ function getLastDigit(value) {
  * '-525.5'     => -525.5
  */
 function parseNumberFromString(value) {
-  return Number(value)
+  return Number(value);
 }
 
 /**
@@ -159,9 +155,8 @@ function parseNumberFromString(value) {
  *   1,2,3   => 3.741657386773941
  */
 function getParallelepipedDiagonal(a, b, c) {
-  return Math.sqrt(a**2+b**2+c**2)
+  return Math.sqrt(a ** 2 + b ** 2 + c ** 2);
 }
-
 
 /**
  * Returns the number rounded to specified power of 10.
@@ -181,7 +176,7 @@ function getParallelepipedDiagonal(a, b, c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-  return Math.round(num/10**pow)*10**pow
+  return Math.round(num / 10 ** pow) * 10 ** pow;
 }
 
 /**
@@ -201,12 +196,12 @@ function roundToPowerOfTen(num, pow) {
  *   16 => false
  *   17 => true
  */
-function isPrime(num){
-  if (num<=0||num==1||num%1!=0){return false}
-  for (let i=2;i<=Math.sqrt(num);){
-    if (num%i==0) return false;
-    i==2 ? i+=1 : i+=2
-  };
+function isPrime(num) {
+  if (num <= 0 || num === 1 || num % 1 !== 0) { return false; }
+  for (let i = 2; i <= Math.sqrt(num);) {
+    if (num % i === 0) return false;
+    if (i === 2) { i += 1; } else { i += 2; }
+  }
   return true;
 }
 
@@ -226,7 +221,7 @@ function isPrime(num){
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-  return (!isNaN(value))?(Number(value)):(def)
+  return (!Number.isNaN(value)) ? (Number(value)) : (def);
 }
 
 module.exports = {

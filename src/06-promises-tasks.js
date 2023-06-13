@@ -5,7 +5,6 @@
  *                                                                                                *
  ************************************************************************************************ */
 
-
 /**
  * Return Promise object that is resolved with string value === 'Hooray!!! She said "Yes"!',
  * if boolean value === true is passed, resolved with string value === 'Oh no, she said "No".',
@@ -29,12 +28,11 @@
  *                                                    //  Ask her again.';
  */
 function willYouMarryMe(isPositiveAnswer) {
-  return new Promise((res)=>{
-    if (typeof isPositiveAnswer != 'boolean'){throw new Error('Wrong parameter is passed! Ask her again.')}
-    res(!!isPositiveAnswer)
-  }).then((res)=>(res)?'Hooray!!! She said "Yes"!':'Oh no, she said "No".')
+  return new Promise((res) => {
+    if (typeof isPositiveAnswer !== 'boolean') { throw new Error('Wrong parameter is passed! Ask her again.'); }
+    res(!!isPositiveAnswer);
+  }).then((res) => ((res) ? 'Hooray!!! She said "Yes"!' : 'Oh no, she said "No".'));
 }
-
 
 /**
  * Return Promise object that should be resolved with array containing plain values.
@@ -52,7 +50,7 @@ function willYouMarryMe(isPositiveAnswer) {
  *
  */
 function processAllPromises(array) {
-  return Promise.all(array)
+  return Promise.all(array);
 }
 
 /**
@@ -75,7 +73,7 @@ function processAllPromises(array) {
  *
  */
 function getFastestPromise(array) {
-  return Promise.race(array)
+  return Promise.race(array);
 }
 
 /**

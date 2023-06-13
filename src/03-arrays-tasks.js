@@ -7,7 +7,6 @@
  *                                                                                            *
  ******************************************************************************************** */
 
-
 /**
  * Returns an index of the specified element in array or -1 if element is not found
  *
@@ -21,7 +20,7 @@
  *    [0, 1, 2, 3, 4, 5], 5    => 5
  */
 function findElement(arr, value) {
-  return arr.indexOf(value)
+  return arr.indexOf(value);
 }
 
 /**
@@ -36,9 +35,8 @@ function findElement(arr, value) {
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-  return Array.from(Array(len),(_,i)=>2*i+1)
+  return Array.from(Array(len), (_, i) => 2 * i + 1);
 }
-
 
 /**
  * Returns the doubled array - elements of the specified array
@@ -53,9 +51,8 @@ function generateOdds(len) {
  *    [] => []
  */
 function doubleArray(arr) {
-  return arr.concat(arr)
+  return arr.concat(arr);
 }
-
 
 /**
  * Returns an array of positive numbers from the specified array in original order
@@ -69,7 +66,7 @@ function doubleArray(arr) {
  *    [] => []
  */
 function getArrayOfPositives(arr) {
-  return arr.filter((a)=>a>0)
+  return arr.filter((a) => a > 0);
 }
 
 /**
@@ -84,7 +81,7 @@ function getArrayOfPositives(arr) {
  *    [ 'cat, 'dog', 'raccoon' ] => [ 'cat', 'dog', 'raccoon' ]
  */
 function getArrayOfStrings(arr) {
-  return arr.filter((a)=>typeof a == 'string')
+  return arr.filter((a) => typeof a === 'string');
 }
 
 /**
@@ -101,7 +98,7 @@ function getArrayOfStrings(arr) {
  *    [ false, 0, NaN, '', undefined ]   => [ ]
  */
 function removeFalsyValues(arr) {
-  return arr.filter((a)=>!!a)
+  return arr.filter((a) => !!a);
 }
 
 /**
@@ -116,9 +113,8 @@ function removeFalsyValues(arr) {
  *    [ 'a', 'b', 'c', 'd', 'e', 'f', 'g' ]  => [ 'A', 'B', 'C', 'D', 'E', 'F', 'G' ]
  */
 function getUpperCaseStrings(arr) {
-  return arr.map((a)=>a.toUpperCase())
+  return arr.map((a) => a.toUpperCase());
 }
-
 
 /**
  * Returns the array of string lengths from the specified string array.
@@ -131,7 +127,7 @@ function getUpperCaseStrings(arr) {
  *    [ 'angular', 'react', 'ember' ] => [ 7, 5, 5 ]
  */
 function getStringsLength(arr) {
-  return arr.map((a)=>a.length)
+  return arr.map((a) => a.length);
 }
 
 /**
@@ -146,7 +142,7 @@ function getStringsLength(arr) {
  *    [ 1, 'b', 'c'], 'x', 0  => [ 'x', 1, 'b', 'c' ]
  */
 function insertItem(arr, item, index) {
-  return arr.splice(index,0,item)
+  return arr.splice(index, 0, item);
 }
 
 /**
@@ -160,9 +156,8 @@ function insertItem(arr, item, index) {
  *    [ 'a', 'b', 'c', 'd'], 3  => [ 'a', 'b', 'c' ]
  */
 function getHead(arr, n) {
-  return arr.slice(0,n)
+  return arr.slice(0, n);
 }
-
 
 /**
  * Returns the n last items of the specified array
@@ -175,9 +170,8 @@ function getHead(arr, n) {
  *    [ 'a', 'b', 'c', 'd'], 3  => [ 'b', 'c', 'd' ]
  */
 function getTail(arr, n) {
-  return arr.slice(-n)
+  return arr.slice(-n);
 }
-
 
 /**
  * Returns CSV representation of two-dimensional numeric array.
@@ -200,7 +194,7 @@ function getTail(arr, n) {
  *    +'30,31,32,33,34'
  */
 function toCsvText(arr) {
-  return arr.map((a)=>a.join()).join('\n')
+  return arr.map((a) => a.join()).join('\n');
 }
 
 /**
@@ -215,9 +209,8 @@ function toCsvText(arr) {
  *   [ 10, 100, -1 ]      => [ 100, 10000, 1 ]
  */
 function toArrayOfSquares(arr) {
-  return arr.map(a=>a**2)
+  return arr.map((a) => a ** 2);
 }
-
 
 /**
  * Transforms the numeric array to the according moving sum array:
@@ -234,9 +227,7 @@ function toArrayOfSquares(arr) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
 function getMovingSum(arr) {
-  return arr.reduce((res,num,i)=>{
-    return res.concat([num+(i>0?res[i-1]:0)])
-  },[])
+  return arr.reduce((res, num, i) => res.concat([num + (i > 0 ? res[i - 1] : 0)]), []);
 }
 
 /**
@@ -251,9 +242,8 @@ function getMovingSum(arr) {
  * [ "a" ] => []
  */
 function getSecondItems(arr) {
-  return Array.from(Array(Math.floor(arr.length/2)),(_,i)=>arr[2*i+1])
+  return Array.from(Array(Math.floor(arr.length / 2)), (_, i) => arr[2 * i + 1]);
 }
-
 
 /**
  * Propagates every item in sequence its position times
@@ -270,9 +260,11 @@ function getSecondItems(arr) {
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
 function propagateItemsByPositionIndex(arr) {
-  return Array.from(Array(arr.length*(arr.length+1)/2),(_,i)=>arr[Math.floor((Math.sqrt(1+8*i)-1)/2)])
+  return Array.from(
+    Array((arr.length * (arr.length + 1)) / 2),
+    (_, i) => arr[Math.floor((Math.sqrt(1 + 8 * i) - 1) / 2)],
+  );
 }
-
 
 /**
  * Returns the 3 largest numbers from the specified array
@@ -288,9 +280,8 @@ function propagateItemsByPositionIndex(arr) {
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
 function get3TopItems(arr) {
-  return arr.slice(-3).reverse()
+  return arr.slice(-3).reverse();
 }
-
 
 /**
  * Returns the number of positive numbers from specified array
@@ -306,7 +297,7 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-  return arr.reduce((a,b)=>((typeof b=='number')&&(b>0))?(a+1):(a),0)
+  return arr.reduce((a, b) => (((typeof b === 'number') && (b > 0)) ? (a + 1) : (a)), 0);
 }
 
 /**
@@ -323,10 +314,10 @@ function getPositivesCount(arr) {
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
 function sortDigitNamesByNumericOrder(arr) {
-  function strToNum(str){
-    return ['zero','one','two','three','four','five','six','seven','eight','nine'].indexOf(str)
+  function strToNum(str) {
+    return ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'].indexOf(str);
   }
-  return arr.sort((a,b)=>strToNum(a)-strToNum(b))
+  return arr.sort((a, b) => strToNum(a) - strToNum(b));
 }
 
 /**
@@ -342,7 +333,7 @@ function sortDigitNamesByNumericOrder(arr) {
  *   [ 1, 10, 100, 1000 ]  => 1111
  */
 function getItemsSum(arr) {
-  return arr.length>0?arr.reduce((a,b)=>a+b):0
+  return arr.length > 0 ? arr.reduce((a, b) => a + b) : 0;
 }
 
 /**
@@ -358,7 +349,7 @@ function getItemsSum(arr) {
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
 function getFalsyValuesCount(arr) {
-  return arr.length>0?arr.reduce((a,b)=>a+(!Boolean(b)?1:0),0):0
+  return arr.length > 0 ? arr.reduce((a, b) => a + (!b ? 1 : 0), 0) : 0;
 }
 
 /**
@@ -376,7 +367,7 @@ function getFalsyValuesCount(arr) {
  *    [ true, 0, 1, 'true' ], true => 1
  */
 function findAllOccurrences(arr, item) {
-    return arr.reduce((a,b)=>b===item?a+1:a,0)
+  return arr.reduce((a, b) => (b === item ? a + 1 : a), 0);
 }
 
 /**
@@ -391,9 +382,8 @@ function findAllOccurrences(arr, item) {
  *    ['rock', 'paper', 'scissors']     => 'rock,paper,scissors'
  */
 function toStringList(arr) {
-  return arr.join()
+  return arr.join();
 }
-
 
 /**
  * Sorts the specified array by country name first and city name
@@ -422,13 +412,13 @@ function toStringList(arr) {
  *    ]
  */
 function sortCitiesArray(arr) {
-  return arr.sort((a,b)=>{
-    if (a.country>b.country){return 1}
-    if (a.country<b.country){return -1}
-    if (a.city>b.city){return 1}
-    if (a.city<b.city){return -1}
-    return 0
-  })
+  return arr.sort((a, b) => {
+    if (a.country > b.country) { return 1; }
+    if (a.country < b.country) { return -1; }
+    if (a.city > b.city) { return 1; }
+    if (a.city < b.city) { return -1; }
+    return 0;
+  });
 }
 
 /**
@@ -450,7 +440,7 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]
  */
 function getIdentityMatrix(n) {
-  return Array.from(Array(n),(_,i)=>Array.from(Array(n),(_,j)=>i==j?1:0))
+  return Array.from(Array(n), (_, i) => Array.from(Array(n), (__, j) => (i === j ? 1 : 0)));
 }
 
 /**
@@ -467,7 +457,7 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-  return Array.from(Array(end-start+1),(_,i)=>i+start)
+  return Array.from(Array(end - start + 1), (_, i) => i + start);
 }
 
 /**
@@ -482,13 +472,12 @@ function getIntervalArray(start, end) {
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
 function distinct(arr) {
-  return arr.reduce((res,item,i)=>{
-    if (res.indexOf(item)==-1){
-      return res.concat([item])
-    }else{
-      return res
+  return arr.reduce((res, item) => {
+    if (res.indexOf(item) === -1) {
+      return res.concat([item]);
     }
-  },[])
+    return res;
+  }, []);
 }
 
 /**
@@ -522,19 +511,18 @@ function distinct(arr) {
  *   }
  */
 function group(array, keySelector, valueSelector) {
-  return array.reduce((res,item)=>{
-    let key = keySelector(item);
-    let value = valueSelector(item);
-    if (res.has(key)){
-      let val = res.get(key)
-      res.set(key, val.concat([value]))
-    }else{
-      res.set(key, [value])
+  return array.reduce((res, item) => {
+    const key = keySelector(item);
+    const value = valueSelector(item);
+    if (res.has(key)) {
+      const val = res.get(key);
+      res.set(key, val.concat([value]));
+    } else {
+      res.set(key, [value]);
     }
-    return res
-  },new Map())
+    return res;
+  }, new Map());
 }
-
 
 /**
  * Projects each element of the specified array to a sequence
@@ -550,9 +538,8 @@ function group(array, keySelector, valueSelector) {
  *   ['one','two','three'], (x) => x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
-  return arr.map(childrenSelector).flat(1)
+  return arr.map(childrenSelector).flat(1);
 }
-
 
 /**
  * Returns an element from the multidimensional array by the specified indexes.
@@ -567,9 +554,12 @@ function selectMany(arr, childrenSelector) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(arr, indexes) {
-  return (indexes.length>1)?(getElementByIndexes(arr[indexes[0]],indexes.slice(1))):(arr[indexes[0]])
+  return (indexes.length > 1) ? (getElementByIndexes(
+    arr[indexes[0]],
+    indexes.slice(1),
+  )
+  ) : (arr[indexes[0]]);
 }
-
 
 /**
  * Swaps the head and tail of the specified array:
@@ -590,9 +580,11 @@ function getElementByIndexes(arr, indexes) {
  *
  */
 function swapHeadAndTail(arr) {
-  return arr.slice(-Math.floor(arr.length/2)).concat(arr.slice(Math.floor(arr.length/2),-Math.floor(arr.length/2))).concat(arr.slice(0,Math.floor(arr.length/2)))
+  return arr
+    .slice(-Math.floor(arr.length / 2))
+    .concat(arr.slice(Math.floor(arr.length / 2), -Math.floor(arr.length / 2)))
+    .concat(arr.slice(0, Math.floor(arr.length / 2)));
 }
-
 
 module.exports = {
   findElement,

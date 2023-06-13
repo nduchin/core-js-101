@@ -8,7 +8,6 @@
  *                                                                                             *
  ********************************************************************************************* */
 
-
 /**
  * Returns the functions composition of two specified functions f(x) and g(x).
  * The result of compose is to be a function of one argument, (lets call the argument x),
@@ -24,11 +23,8 @@
  *
  */
 function getComposition(f, g) {
-  return function(x){
-    return f(g(x))
-  }
+  return (x) => f(g(x));
 }
-
 
 /**
  * Returns the math power function with the specified exponent
@@ -47,11 +43,8 @@ function getComposition(f, g) {
  *
  */
 function getPowerFunction(exponent) {
-  return function(num){
-    return num**exponent
-  }
+  return (num) => num ** exponent;
 }
-
 
 /**
  * Returns the polynom function of one argument based on specified coefficients.
@@ -66,11 +59,10 @@ function getPowerFunction(exponent) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-function getPolynom() {
-  if (arguments.length==0){return ()=>null}
-  return new Function(`x`,`return ${[...arguments].map((arg,i)=>`${arg}*x**${arguments.length-i-1}`).join('+')}`)
+function getPolynom(...array) {
+  if (array.length === 0) { return () => null; }
+  return (x) => array.reverse().reduce((sum, exp, idx) => sum + exp * x ** idx, 0);
 }
-
 
 /**
  * Memoizes passed function and returns function
@@ -87,14 +79,13 @@ function getPolynom() {
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
 function memoize(func) {
-  return function(){
-    if (!this.memo){
+  return () => {
+    if (!this.memo) {
       this.memo = func();
     }
-    return this.memo
-  }
+    return this.memo;
+  };
 }
-
 
 /**
  * Returns the function trying to call the passed function and if it throws,
@@ -112,21 +103,19 @@ function memoize(func) {
  * retryer() => 2
  */
 function retry(func, attempts) {
-  const localAttempts = attempts;
-  return function(){
-    let i=0
-    for (let err;i<=localAttempts&&!err;i++){
-      err=true
+  return () => {
+    let res;
+    for (let i = 0, err; i <= attempts && !err; i += 1) {
+      err = true;
       try {
-        return func()
-      }
-      catch {
-        err=false
+        res = func();
+      } catch (e) {
+        if (e) err = false;
       }
     }
-  }
+    return res;
+  };
 }
-
 
 /**
  * Returns the logging wrapper for the specified method,
@@ -152,14 +141,13 @@ function retry(func, attempts) {
  *
  */
 function logger(func, logFunc) {
-  return function(){
-    logFunc(`${func.name}(${[...arguments].map((e)=>JSON.stringify(e))}) starts`)
-    let res = func(...arguments)
-    logFunc(`${func.name}(${[...arguments].map((e)=>JSON.stringify(e))}) ends`)
-    return res
-  }
+  return (...args) => {
+    logFunc(`${func.name}(${args.map((e) => JSON.stringify(e))}) starts`);
+    const res = func(...args);
+    logFunc(`${func.name}(${args.map((e) => JSON.stringify(e))}) ends`);
+    return res;
+  };
 }
-
 
 /**
  * Return the function with partial applied arguments
@@ -175,11 +163,8 @@ function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
 function partialUsingArguments(fn, ...args1) {
-  return function(){
-    return fn.apply(null,[...args1].concat([...arguments]))
-  }
+  return (...args) => fn.call(null, ...[...args1].concat(args));
 }
-
 
 /**
  * Returns the id generator function that returns next integer starting
@@ -199,12 +184,13 @@ function partialUsingArguments(fn, ...args1) {
  *   getId10() => 11
  */
 function getIdGeneratorFunction(startFrom) {
-  let count = startFrom
-  return function(){
-    return count++
-  }
+  let count = startFrom;
+  return () => {
+    const res = count;
+    count += 1;
+    return res;
+  };
 }
-
 
 module.exports = {
   getComposition,
