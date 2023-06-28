@@ -112,35 +112,83 @@ function fromJSON(proto, json) {
  *  For more examples see unit tests.
  */
 
-const cssSelectorBuilder = {
-  element(/* value */) {
-    throw new Error('Not implemented');
-  },
-
-  id(/* value */) {
-    throw new Error('Not implemented');
-  },
-
-  class(/* value */) {
-    throw new Error('Not implemented');
-  },
-
-  attr(/* value */) {
-    throw new Error('Not implemented');
-  },
-
-  pseudoClass(/* value */) {
-    throw new Error('Not implemented');
-  },
-
-  pseudoElement(/* value */) {
-    throw new Error('Not implemented');
-  },
-
-  combine(/* selector1, combinator, selector2 */) {
-    throw new Error('Not implemented');
-  },
+const ERR = {
+  MUL_KEY: 'Element, id and pseudo-element should not occur more then one time inside the selector',
+  ORDER: 'Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element',
 };
+
+class CssBuilder {
+  constructor() {
+    this.state = 0;
+  }
+
+  element(str) { // 0 -> 1
+    this.stateVert(1);
+    this.elementStr = str;
+    return this;
+  }
+
+  id(str) { // 1 -> 2
+    this.stateVert(2);
+    this.idStr = `#${str}`;
+    return this;
+  }
+
+  class(str) { // 2 -> 3
+    return this.multiProp('classStr', `.${str}`, 3);
+  }
+
+  attr(str) { // 3 -> 4
+    return this.multiProp('attrStr', `[${str}]`, 4);
+  }
+
+  pseudoClass(str) { // 4 -> 5
+    return this.multiProp('pseudoClassStr', `:${str}`, 5);
+  }
+
+  pseudoElement(str) { // 5 -> 6
+    this.stateVert(6);
+    this.pseudoElementStr = `::${str}`;
+    return this;
+  }
+
+  stringify() {
+    return `${this.elementStr || ''}${this.idStr || ''}${this.classStr || ''}${this.prop || ''}${this.attrStr || ''}${this.pseudoClassStr || ''}${this.pseudoElementStr || ''}`;
+  }
+
+  multiProp(prop, str, state) {
+    this.stateVert(state, true);
+    if (!this[prop]) { this[prop] = str; } else { this[prop] += str; }
+    return this;
+  }
+
+  stateVert(num, include = false) {
+    if (!include && this.state === num) { throw new Error(ERR.MUL_KEY); }
+    if (this.state > num) { throw new Error(ERR.ORDER); }
+    this.state = num;
+  }
+}
+
+function cssCombine(sel1, divider, sel2) {
+  return {
+    sel1,
+    divider,
+    sel2,
+    stringify() {
+      return `${this.sel1.stringify()} ${this.divider} ${this.sel2.stringify()}`;
+    },
+  };
+}
+
+const cssSelectorBuilder = new Proxy(CssBuilder, {
+  get: (Target, prop) => {
+    if (prop !== 'combine') {
+      const css = new Target();
+      return (...args) => css[prop](...args);
+    }
+    return cssCombine;
+  },
+});
 
 module.exports = {
   Rectangle,
